@@ -1,0 +1,122 @@
+{
+  "theme": "dark",
+  "archetype": "Archetype 5: Jewel & Luxury",
+  "brand": {
+    "name": "Akaal Integrated Solutions",
+    "owner": "Avtar",
+    "phone": "416-918-3601",
+    "location": "Brampton, ON",
+    "vibe": "Premium architectural, luxury tech, timeless, eternal, cinematic, expensive, high-end, reliable."
+  },
+  "colors": {
+    "background": {
+      "base": "#0A0A0A",
+      "surface": "#121212",
+      "surface_glass": "rgba(10, 10, 10, 0.6)"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "#A1A1AA",
+      "muted": "#52525B"
+    },
+    "accent": {
+      "primary": "#D4AF37",
+      "primary_hover": "#B3932D",
+      "subtle": "rgba(212, 175, 55, 0.1)"
+    },
+    "border": {
+      "default": "rgba(255, 255, 255, 0.08)",
+      "hover": "rgba(255, 255, 255, 0.2)"
+    }
+  },
+  "typography": {
+    "fonts": {
+      "heading": "Outfit, sans-serif",
+      "body": "Manrope, sans-serif"
+    },
+    "scale": {
+      "h1": "text-5xl sm:text-6xl+ tracking-tighter font-light",
+      "h2": "text-4xl sm:text-5xl tracking-tight font-light",
+      "h3": "text-2xl sm:text-3xl tracking-tight font-normal",
+      "h4": "text-xl font-medium",
+      "body": "text-base sm:text-lg leading-relaxed text-zinc-400",
+      "overline": "text-xs tracking-[0.2em] uppercase text-zinc-500 font-semibold"
+    }
+  },
+  "spacing": {
+    "section": "py-24 sm:py-32",
+    "container": "max-w-7xl mx-auto px-6 sm:px-12",
+    "gap_large": "gap-12 sm:gap-20",
+    "gap_medium": "gap-8"
+  },
+  "components": {
+    "navbar": {
+      "style": "fixed w-full z-50 backdrop-blur-xl bg-black/60 border-b border-white/5",
+      "layout": "flex justify-between items-center h-20"
+    },
+    "hero": {
+      "style": "relative min-h-[90vh] flex items-center justify-center overflow-hidden",
+      "overlay": "absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-[#0A0A0A] z-10"
+    },
+    "bento_grid": {
+      "wrapper": "grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-6 sm:gap-8",
+      "card": "bg-zinc-900/50 backdrop-blur-sm border border-white/5 p-8 sm:p-10 transition-all duration-300 hover:border-white/15 hover:bg-zinc-900/80"
+    },
+    "buttons": {
+      "primary": "bg-[#D4AF37] text-black font-medium px-8 py-4 text-sm tracking-wide uppercase hover:bg-[#B3932D] transition-colors",
+      "secondary": "bg-transparent text-white border border-white/20 font-medium px-8 py-4 text-sm tracking-wide uppercase hover:bg-white hover:text-black transition-colors"
+    },
+    "forms": {
+      "input": "bg-zinc-900 border-white/10 text-white rounded-none px-4 py-3 focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all",
+      "label": "text-sm text-zinc-400 mb-2 block"
+    }
+  },
+  "media": {
+    "images": [
+      {
+        "category": "hero",
+        "url": "https://images.pexels.com/photos/34989208/pexels-photo-34989208.jpeg",
+        "description": "Luxurious dining and living room with modern decor and ambient lighting - used for the main hero background."
+      },
+      {
+        "category": "service_security",
+        "url": "https://images.pexels.com/photos/10233086/pexels-photo-10233086.jpeg",
+        "description": "Dome security cameras on a wall in dim lighting - used for the security service card."
+      },
+      {
+        "category": "service_datacom",
+        "url": "https://images.pexels.com/photos/6466141/pexels-photo-6466141.jpeg",
+        "description": "High-tech server rack in a secure data center - used for the Data/Comm Cabling service card."
+      },
+      {
+        "category": "portfolio_1",
+        "url": "https://images.pexels.com/photos/32334253/pexels-photo-32334253.jpeg",
+        "description": "Man using a smart control panel for room settings in a luxury space - portfolio or smart home feature."
+      },
+      {
+        "category": "architecture_abstract",
+        "url": "https://images.pexels.com/photos/16239257/pexels-photo-16239257.jpeg",
+        "description": "Minimalist classic hotel facade against dark dramatic sky - used as a background or visual break."
+      }
+    ],
+    "icons": {
+      "library": "lucide-react",
+      "usage": "Use stroke-width 1.5, color zinc-400 for default, gold/champagne for active/hover states."
+    }
+  },
+  "animation_rules": {
+    "scroll": "Use Lenis for smooth scrolling.",
+    "reveal": "Framer Motion 'fade up' with slight y-axis translation (e.g., y: 30, opacity: 0 -> y: 0, opacity: 1) on viewport enter, staggered for lists.",
+    "hover": "Subtle scale-up (1.02) and border illumination for interactive bento cards."
+  },
+  "instructions_to_main_agent": [
+    "Build a premium, single-page or multi-section marketing site matching the 'Akaal Integrated Solutions' luxury identity.",
+    "Avoid standard SaaS purple/blue gradients or generic 'tech' aesthetics. Rely strictly on the defined palette: Deep Obsidian (#0A0A0A), Zinc/Slate grays, and Champagne Gold (#D4AF37) accents.",
+    "Use Lucide icons for services: Shield (Security), Home (Smart Home), Speaker/Tv (Audio-Visual), Network/Server (Data Cabling).",
+    "Construct a 'Tetris' bento grid for the 4 core services.",
+    "Ensure all contrast ratios pass APCA/WCAG AA.",
+    "The hero section must have a dark gradient overlay so text remains perfectly legible over the background image.",
+    "Integrate a Shadcn form in the Contact section with fields for Name, Email, Phone, Project Type, and Message. Display the phone number prominently.",
+    "Add 'data-testid' attributes to all interactive elements for testing."
+  ]
+}
