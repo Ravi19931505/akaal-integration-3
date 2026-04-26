@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Header, Depends
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -19,11 +19,22 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
+ADMIN_TOKEN = os.environ.get('ADMIN_TOKEN', '')
+
 # Create the main app without a prefix
 app = FastAPI(title="Akaal Integrated Solutions API")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
+
+
+# ---------- Auth dependency ----------
+async def require_admin(x_admin_token: Optional[str] = Header(default=None)):
+    if not ADMIN_TOKEN:
+        raise HTTPException(status_code=500, detail="Server admin token not configured")
+    if not x_admin_token or x_admin_token != ADMIN_TOKEN:
+        raise HTTPException(status_code=401, detail="Invalid admin token")
+    return True
 
 
 # ---------- Models ----------
@@ -71,7 +82,7 @@ async def create_contact_inquiry(payload: ContactInquiryCreate):
     return inquiry
 
 
-@api_router.get("/contact", response_model=List[ContactInquiry])
+@api_router.get("/contact", response_model=List[ContactInquiry], dependencies=[Depends(require_admin)])
 async def list_contact_inquiries():
     items = (
         await db.contact_inquiries.find({}, {"_id": 0})
@@ -85,6 +96,19 @@ async def list_contact_inquiries():
             except ValueError:
                 pass
     return items
+
+
+@api_router.delete("/contact/{inquiry_id}", dependencies=[Depends(require_admin)])
+async def delete_contact_inquiry(inquiry_id: str):
+    result = await db.contact_inquiries.delete_one({"id": inquiry_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Inquiry not found")
+    return {"deleted": True, "id": inquiry_id}
+
+
+@api_router.post("/admin/verify")
+async def verify_admin(_: bool = Depends(require_admin)):
+    return {"ok": True}
 
 
 # Include the router in the main app

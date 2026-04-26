@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "@/App.css";
 import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Admin from "@/Admin";
 import {
   Shield,
   Cable,
@@ -24,6 +26,50 @@ import { Toaster, toast } from "sonner";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+/* ---------------- Animated Counter ---------------- */
+function Counter({ end, suffix = "", duration = 1800 }) {
+  const ref = useRef(null);
+  const [val, setVal] = useState(0);
+  const startedRef = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !startedRef.current) {
+            startedRef.current = true;
+            const startTs = performance.now();
+            const target = parseFloat(end);
+            const tick = (now) => {
+              const p = Math.min(1, (now - startTs) / duration);
+              const eased = 1 - Math.pow(1 - p, 3);
+              setVal(target * eased);
+              if (p < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [end, duration]);
+
+  const display =
+    suffix === "%" || end >= 100
+      ? Math.round(val).toString()
+      : Math.round(val).toString();
+  return (
+    <span ref={ref}>
+      {display}
+      {suffix}
+    </span>
+  );
+}
 
 /* ---------------- Reveal hook ---------------- */
 function useReveal() {
@@ -84,7 +130,7 @@ function Navbar() {
           onClick={() => go("hero")}
           className="flex items-center gap-3 group"
         >
-          <span className="w-8 h-8 border border-[#d4af37] flex items-center justify-center text-[#d4af37] font-light text-lg">
+          <span className="w-9 h-9 border border-[#d4af37] flex items-center justify-center text-[#d4af37] font-light text-lg glow-border">
             A
           </span>
           <span className="brand-mark text-sm sm:text-base text-white">
@@ -171,7 +217,7 @@ function Hero() {
       className="relative min-h-[100vh] flex items-center grain overflow-hidden"
     >
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 ken-burns"
         style={{
           backgroundImage:
             "url('https://images.pexels.com/photos/34989208/pexels-photo-34989208.jpeg')",
@@ -181,6 +227,10 @@ function Hero() {
       />
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/60 to-[#0a0a0a]" />
       <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
+
+      {/* Ambient orbs */}
+      <div className="orb orb-gold w-[420px] h-[420px] -top-32 -right-20 z-10" />
+      <div className="orb orb-amber w-[320px] h-[320px] bottom-10 -left-10 z-10" />
 
       <div className="container-wide relative z-20 pt-28 pb-16">
         <div className="max-w-4xl">
@@ -332,7 +382,8 @@ const SERVICES = [
     blurb:
       "State-of-the-art home theatre, distributed audio, lighting, shading and full-residence automation.",
     bullets: ["Home theatre", "Whole-home audio", "Lighting & shades", "Control4 / Crestron"],
-    image: null,
+    image:
+      "https://images.pexels.com/photos/32334253/pexels-photo-32334253.jpeg",
     span: "lg:col-span-5",
   },
   {
@@ -353,7 +404,8 @@ const SERVICES = [
     blurb:
       "One refined ecosystem — security, climate, audio, lighting and entertainment, controlled effortlessly.",
     bullets: ["Unified control", "Voice & app interfaces", "Energy & climate", "Bespoke design"],
-    image: null,
+    image:
+      "https://images.pexels.com/photos/16239257/pexels-photo-16239257.jpeg",
     span: "lg:col-span-7",
   },
 ];
@@ -413,7 +465,7 @@ function Services() {
                     </p>
                   </div>
                   {s.image && (
-                    <div className="hidden md:block w-40 h-40 lg:w-48 lg:h-48 flex-shrink-0 overflow-hidden border border-white/10">
+                    <div className="hidden md:block w-40 h-40 lg:w-48 lg:h-48 flex-shrink-0 overflow-hidden border border-white/10 image-zoom">
                       <img
                         src={s.image}
                         alt={s.title}
@@ -438,6 +490,145 @@ function Services() {
               </article>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Spaces (Lifestyle Showcase) ---------------- */
+const SHOWCASE = [
+  {
+    src: "https://images.pexels.com/photos/34989208/pexels-photo-34989208.jpeg",
+    alt: "Luxury living room with ambient lighting",
+    label: "Residential",
+    h: "h-[420px]",
+  },
+  {
+    src: "https://images.pexels.com/photos/32334253/pexels-photo-32334253.jpeg",
+    alt: "Smart control panel in luxury space",
+    label: "Automation",
+    h: "h-[300px]",
+  },
+  {
+    src: "https://images.pexels.com/photos/16239257/pexels-photo-16239257.jpeg",
+    alt: "Architectural facade",
+    label: "Commercial",
+    h: "h-[360px]",
+  },
+  {
+    src: "https://images.pexels.com/photos/10233086/pexels-photo-10233086.jpeg",
+    alt: "Discreet security cameras",
+    label: "Security",
+    h: "h-[260px]",
+  },
+  {
+    src: "https://images.pexels.com/photos/6466141/pexels-photo-6466141.jpeg",
+    alt: "High-end server rack",
+    label: "Infrastructure",
+    h: "h-[420px]",
+  },
+];
+
+function Spaces() {
+  return (
+    <section
+      id="spaces"
+      data-testid="spaces-section"
+      className="relative section-pad border-t border-white/5 overflow-hidden"
+    >
+      <div className="orb orb-gold w-[500px] h-[500px] -top-32 -left-40" />
+      <div className="orb orb-amber w-[400px] h-[400px] bottom-0 -right-40" />
+
+      <div className="container-wide relative">
+        <div className="grid lg:grid-cols-12 gap-10 mb-16">
+          <div className="lg:col-span-6 reveal">
+            <div className="kicker mb-6">Inside Akaal</div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight font-light">
+              The spaces we
+              <br />
+              <span className="akaal-gold-text italic">quietly transform.</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-5 lg:col-start-8 reveal" style={{ transitionDelay: "120ms" }}>
+            <p className="text-lg text-zinc-400 leading-relaxed">
+              From penthouses overlooking Lake Ontario to commercial towers in
+              the GTA — every Akaal environment is engineered to feel
+              effortless, look immaculate and last a generation.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6">
+          <div className="reveal lg:col-span-5 image-zoom relative border border-white/5 group">
+            <img
+              src={SHOWCASE[0].src}
+              alt={SHOWCASE[0].alt}
+              loading="lazy"
+              className={`w-full ${SHOWCASE[0].h} object-cover`}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-6 left-6 text-[0.7rem] tracking-[0.22em] uppercase text-[#d4af37]">
+              {SHOWCASE[0].label}
+            </div>
+          </div>
+
+          <div className="reveal lg:col-span-7 grid grid-cols-2 gap-4 sm:gap-6" style={{ transitionDelay: "100ms" }}>
+            <div className="image-zoom relative border border-white/5 col-span-2">
+              <img
+                src={SHOWCASE[2].src}
+                alt={SHOWCASE[2].alt}
+                loading="lazy"
+                className={`w-full ${SHOWCASE[2].h} object-cover`}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 text-[0.7rem] tracking-[0.22em] uppercase text-[#d4af37]">
+                {SHOWCASE[2].label}
+              </div>
+            </div>
+            <div className="image-zoom relative border border-white/5">
+              <img
+                src={SHOWCASE[1].src}
+                alt={SHOWCASE[1].alt}
+                loading="lazy"
+                className={`w-full ${SHOWCASE[1].h} object-cover`}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-5 left-5 text-[0.65rem] tracking-[0.22em] uppercase text-[#d4af37]">
+                {SHOWCASE[1].label}
+              </div>
+            </div>
+            <div className="image-zoom relative border border-white/5">
+              <img
+                src={SHOWCASE[3].src}
+                alt={SHOWCASE[3].alt}
+                loading="lazy"
+                className={`w-full ${SHOWCASE[3].h} object-cover`}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-5 left-5 text-[0.65rem] tracking-[0.22em] uppercase text-[#d4af37]">
+                {SHOWCASE[3].label}
+              </div>
+            </div>
+          </div>
+
+          <div className="reveal lg:col-span-12 image-zoom relative border border-white/5" style={{ transitionDelay: "180ms" }}>
+            <img
+              src={SHOWCASE[4].src}
+              alt={SHOWCASE[4].alt}
+              loading="lazy"
+              className="w-full h-[280px] sm:h-[360px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent pointer-events-none" />
+            <div className="absolute bottom-8 left-8 sm:left-12">
+              <div className="text-[0.7rem] tracking-[0.22em] uppercase text-[#d4af37] mb-2">
+                {SHOWCASE[4].label}
+              </div>
+              <div className="text-2xl sm:text-3xl text-white font-light tracking-tight max-w-md">
+                Backbone infrastructure for entire developments.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -477,13 +668,14 @@ function Approach() {
     <section
       id="approach"
       data-testid="approach-section"
-      className="section-pad relative border-t border-white/5"
+      className="section-pad relative border-t border-white/5 overflow-hidden"
       style={{
         background:
           "linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 50%, #0a0a0a 100%)",
       }}
     >
-      <div className="container-wide">
+      <div className="orb orb-gold w-[400px] h-[400px] top-20 right-0" />
+      <div className="container-wide relative">
         <div className="reveal max-w-3xl mb-20">
           <div className="kicker mb-6">03 / Method</div>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight font-light">
@@ -672,6 +864,35 @@ function About() {
           </div>
 
           <div className="lg:col-span-7 reveal" style={{ transitionDelay: "150ms" }}>
+            {/* Founder image collage */}
+            <div className="grid grid-cols-3 gap-3 mb-10 reveal">
+              <div className="image-zoom relative border border-white/5 col-span-2 row-span-2">
+                <img
+                  src="https://images.pexels.com/photos/34989208/pexels-photo-34989208.jpeg"
+                  alt="Refined interior"
+                  loading="lazy"
+                  className="w-full h-[320px] sm:h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+              </div>
+              <div className="image-zoom relative border border-white/5">
+                <img
+                  src="https://images.pexels.com/photos/32334253/pexels-photo-32334253.jpeg"
+                  alt="Smart panel detail"
+                  loading="lazy"
+                  className="w-full h-[155px] sm:h-[195px] object-cover"
+                />
+              </div>
+              <div className="image-zoom relative border border-white/5">
+                <img
+                  src="https://images.pexels.com/photos/16239257/pexels-photo-16239257.jpeg"
+                  alt="Architectural detail"
+                  loading="lazy"
+                  className="w-full h-[155px] sm:h-[195px] object-cover"
+                />
+              </div>
+            </div>
+
             <div className="grid sm:grid-cols-2 gap-px bg-white/5">
               {[
                 {
@@ -777,10 +998,8 @@ function Contact() {
       data-testid="contact-section"
       className="section-pad border-t border-white/5 relative overflow-hidden"
     >
-      <div
-        className="absolute -top-40 right-0 w-[600px] h-[600px] rounded-full opacity-[0.08] blur-3xl"
-        style={{ background: "radial-gradient(circle, #d4af37 0%, transparent 70%)" }}
-      />
+      <div className="orb orb-gold w-[600px] h-[600px] -top-40 -right-40" />
+      <div className="orb orb-amber w-[420px] h-[420px] bottom-0 -left-40" />
       <div className="container-wide relative">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
           <div className="lg:col-span-5 reveal">
@@ -1041,7 +1260,7 @@ function Footer() {
 }
 
 /* ---------------- App ---------------- */
-function App() {
+function MarketingSite() {
   useReveal();
 
   // Health ping (keeps API warm + verifies connection in console)
@@ -1068,6 +1287,7 @@ function App() {
         <Hero />
         <TrustedStrip />
         <Services />
+        <Spaces />
         <Approach />
         <Projects />
         <About />
@@ -1075,6 +1295,17 @@ function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MarketingSite />} />
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

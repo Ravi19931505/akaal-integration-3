@@ -29,17 +29,21 @@
 - Responsive on every viewport (mobile = "app").
 
 ## What's Been Implemented (2026-04-26)
-- ✅ Sticky glass navbar with smooth-scroll links + mobile hamburger.
-- ✅ Cinematic hero with luxury interior background, dual-gradient overlay, animated gold "unwired" wordmark, brand tagline, dual CTAs, 4-stat grid (20+ years, 300+ projects, 24/7, 100% in-house).
+- ✅ Sticky glass navbar with smooth-scroll links + mobile hamburger + glow-pulse on the gold "A" brand mark.
+- ✅ Cinematic hero with **Ken-Burns slow-zoom** background, dual-gradient overlay, animated gold "unwired" wordmark, brand tagline, dual CTAs, **animated stat counters** (count up from 0 when in view).
+- ✅ Floating ambient gold orbs drifting in dark sections (Hero, Spaces, Approach, Contact).
 - ✅ Marquee trusted-clients strip.
-- ✅ Bento-grid Services section (4 cards with Lucide icons, bullet checklists, hover spotlights, optional imagery).
-- ✅ Approach / Method section (4 deliberate phases with numbered steps).
+- ✅ Bento-grid Services section — all 4 cards now have imagery (Security cameras, AV smart-panel, Data server rack, Smart Home architectural facade) with image-zoom on hover.
+- ✅ **NEW Spaces / Lifestyle Showcase section** — 5-image masonry grid (Residential, Commercial, Automation, Security, Infrastructure) with image-zoom hover and gradient labels.
+- ✅ Approach / Method section (4 deliberate phases with numbered steps, gold orb in background).
 - ✅ Projects gallery (4 case studies, grayscale → color hover, location tags).
-- ✅ About section with sticky-headline layout, 4 pillar grid, founder pull-quote, contact info inline.
-- ✅ Premium Contact form: name, email, phone, project type (dropdown), message — with sonner toasts, validation, and clean post-submit reset. POSTs to `/api/contact`.
-- ✅ Footer with brand mark, disciplines list, studio info, copyright.
-- ✅ Backend: GET `/api/`, POST `/api/contact` (with EmailStr validation), GET `/api/contact`. Inquiries stored in `contact_inquiries` collection.
-- ✅ data-testid attributes on every interactive element (32+ test ids).
+- ✅ About section: 3-image collage above pillar grid (founder visual), sticky-headline layout, 4 pillar grid, founder pull-quote, contact info inline.
+- ✅ Premium Contact form with floating gold orbs background, sonner toasts, validation, post-submit reset. POSTs to `/api/contact`.
+- ✅ Footer with brand mark, disciplines list, studio info, email link, copyright.
+- ✅ **Admin Console** at `/admin` (token-protected via `X-Admin-Token` header) — list, view detail, delete inquiries, click-to-call, click-to-email reply. Token persisted in localStorage.
+- ✅ Backend: GET `/api/`, POST `/api/contact`, GET `/api/contact` (admin-only), DELETE `/api/contact/{id}` (admin-only), POST `/api/admin/verify`. Inquiries stored in `contact_inquiries` collection.
+- ✅ data-testid attributes on every interactive element (40+ test ids).
+- ✅ CSS-only animations (no heavy JS libs): kenBurns, shimmer, glowPulse, orbDrift, floatY, image-zoom, fade-up reveal.
 - ✅ Tested: backend 100% (6/6), frontend 89% (16/18) — zero blocking issues.
 
 ## Prioritized Backlog

@@ -91,6 +91,96 @@ h1, h2, h3, h4, h5, h6 {
     50% { box-shadow: 0 0 0 12px rgba(212, 175, 55, 0); }
 }
 
+@keyframes kenBurns {
+    0% { transform: scale(1.05) translate(0, 0); }
+    50% { transform: scale(1.18) translate(-1.5%, -1%); }
+    100% { transform: scale(1.05) translate(0, 0); }
+}
+
+@keyframes floatY {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+}
+
+@keyframes floatX {
+    0%, 100% { transform: translateX(0px); }
+    50% { transform: translateX(20px); }
+}
+
+@keyframes orbDrift {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(40px, -30px) scale(1.08); }
+    66% { transform: translate(-30px, 40px) scale(0.95); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+        border-color: rgba(212, 175, 55, 0.25);
+    }
+    50% {
+        box-shadow: 0 0 60px rgba(212, 175, 55, 0.4);
+        border-color: rgba(212, 175, 55, 0.6);
+    }
+}
+
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+@keyframes rotate360 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.ken-burns {
+    animation: kenBurns 22s ease-in-out infinite;
+    will-change: transform;
+}
+
+.float-y { animation: floatY 6s ease-in-out infinite; }
+.float-x { animation: floatX 9s ease-in-out infinite; }
+
+.orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.25;
+    pointer-events: none;
+    will-change: transform;
+}
+.orb-gold {
+    background: radial-gradient(circle, #d4af37 0%, transparent 65%);
+    animation: orbDrift 18s ease-in-out infinite;
+}
+.orb-amber {
+    background: radial-gradient(circle, #b3932d 0%, transparent 65%);
+    animation: orbDrift 24s ease-in-out infinite reverse;
+}
+
+.glow-border {
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.image-zoom {
+    overflow: hidden;
+}
+.image-zoom img {
+    transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), filter 1s ease;
+    will-change: transform;
+}
+.image-zoom:hover img {
+    transform: scale(1.08);
+}
+
 .reveal {
     opacity: 0;
     transform: translateY(30px);
