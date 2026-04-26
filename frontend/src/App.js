@@ -827,20 +827,26 @@ function Contact() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-5">
-                <span className="w-12 h-12 border border-white/15 flex items-center justify-center text-[#d4af37]">
+              <a
+                data-testid="contact-email-card"
+                href="mailto:Admin@akaalintegratedsolutions.ca"
+                className="flex items-center gap-5 group"
+              >
+                <span className="w-12 h-12 border border-white/15 flex items-center justify-center text-[#d4af37] group-hover:border-[#d4af37] transition-colors">
                   <Mail size={18} strokeWidth={1.5} />
                 </span>
                 <div>
                   <div className="text-[0.7rem] tracking-[0.22em] uppercase text-zinc-500">
                     Email
                   </div>
-                  <div className="text-lg text-white">Available on request</div>
+                  <div className="text-lg text-white group-hover:text-[#d4af37] transition-colors break-all">
+                    Admin@akaalintegratedsolutions.ca
+                  </div>
                   <div className="text-sm text-zinc-500">
-                    Submit the form or call directly
+                    Personal response within one business day
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -1002,6 +1008,15 @@ function Footer() {
                   className="hover:text-[#d4af37]"
                 >
                   416 · 918 · 3601
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:Admin@akaalintegratedsolutions.ca"
+                  data-testid="footer-email-link"
+                  className="hover:text-[#d4af37] break-all"
+                >
+                  Admin@akaalintegratedsolutions.ca
                 </a>
               </li>
               <li>By appointment only</li>
