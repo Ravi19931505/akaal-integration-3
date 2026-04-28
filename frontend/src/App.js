@@ -313,7 +313,7 @@ function Hero() {
           >
             {[
               { id: "years", k: 10, s: "+", v: "Years of Mastery" },
-              { id: "projects", k: 300, s: "+", v: "Projects Delivered" },
+              { id: "projects", k: 100, s: "+", v: "Projects Delivered" },
               { id: "support", k: 24, s: "/7", v: "Service & Support" },
               { id: "design", k: 100, s: "%", v: "In-House Design" },
             ].map((s) => (
