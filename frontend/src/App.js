@@ -312,7 +312,7 @@ function Hero() {
             style={{ transitionDelay: "260ms" }}
           >
             {[
-              { id: "years", k: 20, s: "+", v: "Years of Mastery" },
+              { id: "years", k: 10, s: "+", v: "Years of Mastery" },
               { id: "projects", k: 300, s: "+", v: "Projects Delivered" },
               { id: "support", k: 24, s: "/7", v: "Service & Support" },
               { id: "design", k: 100, s: "%", v: "In-House Design" },
@@ -865,7 +865,7 @@ function About() {
               meet your unique needs.
             </p>
             <p className="mt-5 text-lg text-zinc-400 leading-relaxed">
-              With over <span className="text-white">20 years of experience</span>{" "}
+              With over <span className="text-white">10 years of experience</span>{" "}
               in the industry, we've built a reputation for delivering
               high-quality cabling services that empower businesses to stay
               connected and perform at their best. Our certified technicians
