@@ -10,15 +10,27 @@
 > - User stated: *"create a website which will look more classy from that one and highlight my brand name"*
 
 ## Architecture
-- **Frontend**: React 19 + Tailwind CSS 3, single-page marketing site with smooth-scroll sections, IntersectionObserver reveal animations, fully responsive (acts as the "app" on mobile/tablet).
-- **Backend**: FastAPI + MongoDB (motor async driver), `/api/contact` endpoint to persist inquiries.
-- **Design system**: Deep obsidian (#0A0A0A) + champagne gold (#D4AF37) accents, Outfit + Manrope typography (Google Fonts). Bento-grid services layout, grayscale-to-color image hovers, marquee trust strip, glassmorphism cards.
+- **Frontend**: React 19 + Tailwind CSS 3, single-page marketing site with smooth-scroll sections, IntersectionObserver reveal animations, fully responsive (acts as the "app" on mobile/tablet). React Router routes: `/` marketing site, `/admin` admin console.
+- **Backend**: FastAPI + MongoDB (motor async driver), `/api/contact` endpoint to persist inquiries; admin-only GET / DELETE protected by `X-Admin-Token` header.
+- **Design system**: Deep obsidian (#0A0A0A) + champagne gold (#D4AF37) accents, Outfit + Manrope typography (Google Fonts). Bento-grid + uniform 3×3 services layout, grayscale-to-color image hovers, marquee trust strip, glassmorphism cards, ken-burns hero, animated counters, floating gold orbs.
 
-## User Personas
-1. **High-Rise Developer** — needs full security + cabling + AV across multi-unit builds.
-2. **Custom Home Owner** — wants bespoke smart-home + theatre + lighting integration.
-3. **Commercial Architect / Property Manager** — looking for a single integrator across security, data and AV.
-4. **Hospitality / Boutique Retail Operator** — needs polished, reliable AV + security retrofit.
+## Business Focus (updated)
+**Akaal Integrated Solutions is a network cabling specialist** delivering 9 services to commercial clients across the GTA:
+1. Structured Cabling Installation
+2. Data & Voice Cabling
+3. Fiber Optic Cabling
+4. Network Design & Consultation
+5. Cable Testing & Certification
+6. Wired & Wireless Network Upgrade
+7. Warehouse Paging System
+8. CCTV & Surveillance
+9. Audio-Visual
+
+## User Personas (updated)
+1. **Corporate Office / Property Manager** — needs Cat6/6A install, fiber backbone, Wi-Fi upgrade.
+2. **Distribution Centre / Warehouse Operator** — needs warehouse paging, wireless coverage, CCTV.
+3. **Healthcare / Educational Facility** — needs structured cabling + AV for classrooms/boardrooms + surveillance.
+4. **Retail Chain / Hospitality Group** — needs unified data/voice, AV, CCTV across multiple locations.
 
 ## Core Requirements (Static)
 - Premium, classy, distinctive identity that elevates well beyond completelywired.com.

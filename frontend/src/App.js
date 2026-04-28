@@ -21,6 +21,11 @@ import {
   Camera,
   Lightbulb,
   Sparkles,
+  Zap,
+  Wifi,
+  Megaphone,
+  BadgeCheck,
+  PencilRuler,
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
 
@@ -259,9 +264,9 @@ function Hero() {
             <span className="brand-mark text-[#d4af37] tracking-[0.25em] text-sm">
               AKAAL
             </span>{" "}
-            Integrated Solutions designs, installs and integrates premium
-            security, audio-visual, structured cabling and smart-home systems
-            for high-rise developments, commercial spaces and custom homes.
+            Integrated Solutions designs, installs and certifies premium
+            structured cabling, fiber optic and network infrastructure for
+            businesses across the Greater Toronto Area.
           </p>
 
           <div
@@ -330,12 +335,12 @@ function Hero() {
 /* ---------------- Trusted strip ---------------- */
 function TrustedStrip() {
   const items = [
-    "High-Rise Developers",
-    "Commercial Architects",
-    "Custom Home Builders",
-    "Property Managers",
-    "Hospitality Groups",
-    "Boutique Retail",
+    "Corporate Offices",
+    "Distribution Centres",
+    "Healthcare Facilities",
+    "Educational Campuses",
+    "Retail Chains",
+    "Warehouses & Logistics",
   ];
   return (
     <section
@@ -360,53 +365,76 @@ function TrustedStrip() {
 /* ---------------- Services Bento ---------------- */
 const SERVICES = [
   {
-    id: "security",
-    icon: Shield,
-    title: "Integrated Security",
+    id: "structured",
+    icon: Network,
+    title: "Structured Cabling Installation",
     blurb:
-      "Access control, intrusion, IP/analog video surveillance and 24/7 monitoring — engineered for high-rise and commercial assets.",
-    bullets: [
-      "Building access control",
-      "IP & analog CCTV",
-      "Intrusion & alarm systems",
-      "Visitor management",
-    ],
-    image:
-      "https://images.pexels.com/photos/10233086/pexels-photo-10233086.jpeg",
-    span: "lg:col-span-7",
+      "End-to-end Cat6/6A and backbone installations engineered for long-term reliability and growth.",
+    bullets: ["Cat6 / Cat6A", "Backbone & risers", "Code-compliant", "Future-ready design"],
+  },
+  {
+    id: "datavoice",
+    icon: Cable,
+    title: "Data & Voice Cabling",
+    blurb:
+      "Unified data and voice infrastructure that powers modern offices, call centres and campuses.",
+    bullets: ["Telecom & VoIP", "Patch panels", "Workstation drops", "MDF / IDF builds"],
+  },
+  {
+    id: "fiber",
+    icon: Zap,
+    title: "Fiber Optic Cabling",
+    blurb:
+      "Single-mode and multi-mode fiber for high-performance backbones, data centres and inter-building runs.",
+    bullets: ["Single-mode", "Multi-mode (OM3/OM4)", "Splicing & termination", "OTDR testing"],
+  },
+  {
+    id: "design",
+    icon: PencilRuler,
+    title: "Network Design & Consultation",
+    blurb:
+      "Strategic network architecture and pre-build consulting to future-proof your infrastructure.",
+    bullets: ["Site surveys", "CAD diagrams", "Capacity planning", "Vendor-neutral"],
+  },
+  {
+    id: "testing",
+    icon: BadgeCheck,
+    title: "Cable Testing & Certification",
+    blurb:
+      "Industry-standard testing and certification — every link documented, validated and warrantied.",
+    bullets: ["Fluke certification", "Pass / fail reports", "25-year warranty", "Compliance docs"],
+  },
+  {
+    id: "upgrade",
+    icon: Wifi,
+    title: "Wired & Wireless Network Upgrade",
+    blurb:
+      "Modernise legacy wired networks and deploy enterprise Wi-Fi (6 / 6E / 7) seamlessly.",
+    bullets: ["Wi-Fi 6 / 6E / 7", "Heat-mapping", "Switch upgrades", "Zero downtime"],
+  },
+  {
+    id: "paging",
+    icon: Megaphone,
+    title: "Warehouse Paging System",
+    blurb:
+      "Industrial-grade paging, intercom and zone audio for warehouses, factories and distribution centres.",
+    bullets: ["Zone paging", "Intercom integration", "Loudspeaker arrays", "Emergency alerts"],
+  },
+  {
+    id: "cctv",
+    icon: Camera,
+    title: "CCTV & Surveillance",
+    blurb:
+      "IP and analog video surveillance with remote monitoring, NVR storage and intelligent analytics.",
+    bullets: ["IP & analog cameras", "NVR / DVR systems", "Remote monitoring", "Low-light optics"],
   },
   {
     id: "av",
     icon: Speaker,
-    title: "Audio-Visual & Automation",
+    title: "Audio-Visual",
     blurb:
-      "State-of-the-art home theatre, distributed audio, lighting, shading and full-residence automation.",
-    bullets: ["Home theatre", "Whole-home audio", "Lighting & shades", "Control4 / Crestron"],
-    image:
-      "https://images.pexels.com/photos/32334253/pexels-photo-32334253.jpeg",
-    span: "lg:col-span-5",
-  },
-  {
-    id: "data",
-    icon: Cable,
-    title: "Structured Data & Comm",
-    blurb:
-      "Telecom, fiber and Cat6/6A networks delivering reliable foundations for every modern building.",
-    bullets: ["Cat6 / Cat6A", "Single & multi-mode fiber", "Telecom & VoIP", "Server room build-outs"],
-    image:
-      "https://images.pexels.com/photos/6466141/pexels-photo-6466141.jpeg",
-    span: "lg:col-span-5",
-  },
-  {
-    id: "smart",
-    icon: Home,
-    title: "Smart Home Integration",
-    blurb:
-      "One refined ecosystem — security, climate, audio, lighting and entertainment, controlled effortlessly.",
-    bullets: ["Unified control", "Voice & app interfaces", "Energy & climate", "Bespoke design"],
-    image:
-      "https://images.pexels.com/photos/16239257/pexels-photo-16239257.jpeg",
-    span: "lg:col-span-7",
+      "Professional AV for boardrooms, training rooms, retail and hospitality — installed and tuned.",
+    bullets: ["Boardrooms", "Digital signage", "Distributed audio", "Display walls"],
   },
 ];
 
@@ -416,20 +444,21 @@ function Services() {
       <div className="container-wide">
         <div className="grid lg:grid-cols-12 gap-10 mb-16">
           <div className="lg:col-span-5 reveal">
-            <div className="kicker mb-6">02 / Disciplines</div>
+            <div className="kicker mb-6">02 / Capabilities</div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight font-light">
-              Four disciplines.
+              Nine disciplines.
               <br />
               <span className="text-zinc-500">One </span>
               <span className="akaal-gold-text italic">seamless</span>
-              <span className="text-zinc-500"> system.</span>
+              <span className="text-zinc-500"> network.</span>
             </h2>
           </div>
           <div className="lg:col-span-6 lg:col-start-7 reveal" style={{ transitionDelay: "120ms" }}>
             <p className="text-lg text-zinc-400 leading-relaxed">
-              We are professional system integrators delivering end-to-end
-              technical environments. From first sketch to final commissioning,
-              every cable, camera and control surface is engineered to feel
+              We are professional network cabling specialists delivering
+              end-to-end infrastructure — from first sketch to final
+              certification. Every Cat6, every fiber, every wireless access
+              point engineered to feel
               <span className="text-white"> invisible </span>
               and behave
               <span className="text-white"> infallible</span>.
@@ -437,53 +466,38 @@ function Services() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((s, i) => {
             const Icon = s.icon;
             return (
               <article
                 key={s.id}
                 data-testid={`service-card-${s.id}`}
-                className={`bento-card reveal p-8 sm:p-10 ${s.span} min-h-[360px] flex flex-col justify-between`}
-                style={{ transitionDelay: `${i * 80}ms` }}
+                className="bento-card reveal p-7 sm:p-8 min-h-[340px] flex flex-col"
+                style={{ transitionDelay: `${(i % 3) * 80}ms` }}
                 onMouseMove={(e) => {
                   const r = e.currentTarget.getBoundingClientRect();
                   e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
                   e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
                 }}
               >
-                <div className="flex items-start justify-between gap-6">
-                  <div className="flex-1">
-                    <div className="w-11 h-11 border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] mb-6">
-                      <Icon size={20} strokeWidth={1.4} />
-                    </div>
-                    <h3 className="text-2xl sm:text-3xl text-white font-light tracking-tight">
-                      {s.title}
-                    </h3>
-                    <p className="mt-4 text-zinc-400 leading-relaxed max-w-md">
-                      {s.blurb}
-                    </p>
-                  </div>
-                  {s.image && (
-                    <div className="hidden md:block w-40 h-40 lg:w-48 lg:h-48 flex-shrink-0 overflow-hidden border border-white/10 image-zoom">
-                      <img
-                        src={s.image}
-                        alt={s.title}
-                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
+                <div className="w-11 h-11 border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] mb-6">
+                  <Icon size={20} strokeWidth={1.4} />
                 </div>
-
-                <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-2">
+                <h3 className="text-xl sm:text-2xl text-white font-light tracking-tight leading-snug">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-zinc-400 leading-relaxed text-sm flex-1">
+                  {s.blurb}
+                </p>
+                <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 pt-5 border-t border-white/5">
                   {s.bullets.map((b) => (
                     <li
                       key={b}
-                      className="text-sm text-zinc-400 flex items-center gap-2"
+                      className="text-xs text-zinc-400 flex items-center gap-2"
                     >
-                      <Check size={14} className="text-[#d4af37]" strokeWidth={2} />
-                      {b}
+                      <Check size={12} className="text-[#d4af37] flex-shrink-0" strokeWidth={2.2} />
+                      <span className="truncate">{b}</span>
                     </li>
                   ))}
                 </ul>
@@ -500,32 +514,32 @@ function Services() {
 const SHOWCASE = [
   {
     src: "https://images.pexels.com/photos/34989208/pexels-photo-34989208.jpeg",
-    alt: "Luxury living room with ambient lighting",
-    label: "Residential",
+    alt: "Premium hospitality interior",
+    label: "AV Environments",
     h: "h-[420px]",
   },
   {
     src: "https://images.pexels.com/photos/32334253/pexels-photo-32334253.jpeg",
-    alt: "Smart control panel in luxury space",
-    label: "Automation",
+    alt: "Smart control panel",
+    label: "Network Endpoints",
     h: "h-[300px]",
   },
   {
     src: "https://images.pexels.com/photos/16239257/pexels-photo-16239257.jpeg",
-    alt: "Architectural facade",
+    alt: "Commercial property",
     label: "Commercial",
     h: "h-[360px]",
   },
   {
     src: "https://images.pexels.com/photos/10233086/pexels-photo-10233086.jpeg",
-    alt: "Discreet security cameras",
-    label: "Security",
+    alt: "CCTV cameras",
+    label: "CCTV & Surveillance",
     h: "h-[260px]",
   },
   {
     src: "https://images.pexels.com/photos/6466141/pexels-photo-6466141.jpeg",
-    alt: "High-end server rack",
-    label: "Infrastructure",
+    alt: "Server rack and structured cabling",
+    label: "Server Rooms · Backbone",
     h: "h-[420px]",
   },
 ];
@@ -625,7 +639,7 @@ function Spaces() {
                 {SHOWCASE[4].label}
               </div>
               <div className="text-2xl sm:text-3xl text-white font-light tracking-tight max-w-md">
-                Backbone infrastructure for entire developments.
+                Backbone infrastructure for entire developments — across the GTA.
               </div>
             </div>
           </div>
@@ -828,17 +842,27 @@ function About() {
       <div className="container-wide">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           <div className="lg:col-span-5 reveal sticky top-28">
-            <div className="kicker mb-6">05 / The House of Akaal</div>
+            <div className="kicker mb-6">05 / Who We Are</div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight font-light">
               <span className="akaal-gold-text italic">Akaal.</span>
               <br />
-              The timeless.
+              The timeless backbone.
             </h2>
             <p className="mt-6 text-lg text-zinc-400 leading-relaxed">
-              Founded by <span className="text-white">Avtar</span> and proudly
-              based in Brampton, Ontario, Akaal Integrated Solutions is built on
-              one principle — that great technology should outlast trends and
-              quietly elevate every space it inhabits.
+              We specialize in providing top-tier network cabling services to
+              businesses of all sizes. Whether you need to install new
+              infrastructure or upgrade existing systems, our experienced team
+              ensures reliable, efficient and scalable solutions tailored to
+              meet your unique needs.
+            </p>
+            <p className="mt-5 text-lg text-zinc-400 leading-relaxed">
+              With over <span className="text-white">20 years of experience</span>{" "}
+              in the industry, we've built a reputation for delivering
+              high-quality cabling services that empower businesses to stay
+              connected and perform at their best. Our certified technicians
+              use the latest technology and adhere to industry standards,
+              ensuring your network operates seamlessly and supports future
+              growth.
             </p>
             <div className="hairline my-10" />
             <div className="space-y-4">
@@ -854,6 +878,16 @@ function About() {
                   className="text-sm hover:text-[#d4af37]"
                 >
                   416 · 918 · 3601
+                </a>
+              </div>
+              <div className="flex items-center gap-4 text-zinc-300">
+                <Mail size={16} className="text-[#d4af37]" />
+                <a
+                  href="mailto:Admin@akaalintegratedsolutions.ca"
+                  data-testid="about-email-link"
+                  className="text-sm hover:text-[#d4af37] break-all"
+                >
+                  Admin@akaalintegratedsolutions.ca
                 </a>
               </div>
               <div className="flex items-center gap-4 text-zinc-300">
@@ -896,20 +930,20 @@ function About() {
             <div className="grid sm:grid-cols-2 gap-px bg-white/5">
               {[
                 {
-                  t: "In-House Design",
-                  d: "Complete design solutions and CAD specifications crafted under one roof — no outsourced surprises.",
+                  t: "Certified Technicians",
+                  d: "Industry-certified team using the latest tools — Fluke testing, fusion splicing and OTDR diagnostics.",
                 },
                 {
-                  t: "Master Installers",
-                  d: "Certified technicians with decades of field experience across Canada's most demanding builds.",
+                  t: "Standards Compliant",
+                  d: "Every install adheres to TIA/EIA, BICSI and Canadian electrical code — fully documented for inspections.",
                 },
                 {
-                  t: "Bespoke Integration",
-                  d: "Tailored security, AV and networking ecosystems engineered for the way each client lives and works.",
+                  t: "Scalable Design",
+                  d: "Infrastructure built for growth — capacity headroom, modular pathways and future-ready cable plant.",
                 },
                 {
                   t: "Lifelong Support",
-                  d: "Dedicated post-installation service, training and continuous system optimisation.",
+                  d: "Up to 25-year warranty on certified runs, with continued service, audits and optimization.",
                 },
               ].map((item, i) => (
                 <div
@@ -929,8 +963,8 @@ function About() {
 
             <blockquote className="mt-12 border-l-2 border-[#d4af37] pl-6 sm:pl-8">
               <p className="text-xl sm:text-2xl text-zinc-200 font-light italic leading-relaxed">
-                “We don't sell systems. We deliver environments — engineered
-                quietly, lived in loudly.”
+                “We don't just pull cable. We engineer the backbone every
+                modern business runs on — quietly, precisely, and built to last.”
               </p>
               <footer className="mt-4 text-sm text-zinc-500 brand-mark tracking-[0.2em]">
                 — Avtar, Founder
@@ -945,11 +979,15 @@ function About() {
 
 /* ---------------- Contact ---------------- */
 const PROJECT_TYPES = [
-  "High-Rise Development",
-  "Commercial Build-Out",
-  "Custom Home",
-  "Smart Home Upgrade",
-  "Security Retrofit",
+  "Structured Cabling Installation",
+  "Data & Voice Cabling",
+  "Fiber Optic Cabling",
+  "Network Design & Consultation",
+  "Cable Testing & Certification",
+  "Wired / Wireless Network Upgrade",
+  "Warehouse Paging System",
+  "CCTV & Surveillance",
+  "Audio-Visual",
   "Other",
 ];
 
@@ -1197,20 +1235,23 @@ function Footer() {
               </div>
             </div>
             <p className="text-zinc-500 text-sm max-w-sm leading-relaxed">
-              Premium system integration for high-rise developments, commercial
-              spaces and custom homes across the Greater Toronto Area.
+              Top-tier network cabling, fiber, CCTV and audio-visual services
+              for businesses across the Greater Toronto Area.
             </p>
           </div>
 
           <div className="md:col-span-3">
             <div className="text-[0.7rem] tracking-[0.22em] uppercase text-zinc-600 mb-5">
-              Disciplines
+              Services
             </div>
             <ul className="space-y-3 text-sm text-zinc-400">
-              <li>Integrated Security</li>
-              <li>Audio-Visual & Automation</li>
               <li>Structured Cabling</li>
-              <li>Smart Home Integration</li>
+              <li>Fiber Optic Cabling</li>
+              <li>Data & Voice Cabling</li>
+              <li>Cable Testing & Certification</li>
+              <li>Wired & Wireless Upgrade</li>
+              <li>CCTV & Audio-Visual</li>
+              <li>Warehouse Paging</li>
             </ul>
           </div>
 
