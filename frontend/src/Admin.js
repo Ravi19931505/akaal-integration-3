@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
 import {
@@ -16,6 +16,43 @@ import {
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 const TOKEN_KEY = "akaal_admin_token";
+
+// Use sessionStorage so the token is wiped when the tab/browser closes,
+// reducing the XSS persistence window for this shared-token admin console.
+const tokenStore = {
+  get: () => {
+    try {
+      return sessionStorage.getItem(TOKEN_KEY) || "";
+    } catch {
+      return "";
+    }
+  },
+  set: (v) => {
+    try {
+      sessionStorage.setItem(TOKEN_KEY, v);
+    } catch {
+      /* storage unavailable */
+    }
+  },
+  clear: () => {
+    try {
+      sessionStorage.removeItem(TOKEN_KEY);
+      // also clear any legacy localStorage value from prior versions
+      localStorage.removeItem(TOKEN_KEY);
+    } catch {
+      /* storage unavailable */
+    }
+  },
+};
+
+const TOAST_OPTIONS = {
+  style: {
+    background: "#121212",
+    border: "1px solid rgba(212,175,55,0.3)",
+    color: "#fff",
+    borderRadius: 0,
+  },
+};
 
 function fmtDate(iso) {
   if (!iso) return "—";
@@ -50,7 +87,7 @@ function Login({ onAuthed }) {
         {},
         { headers: { "X-Admin-Token": pw } }
       );
-      localStorage.setItem(TOKEN_KEY, pw);
+      tokenStore.set(pw);
       toast.success("Welcome back, Avtar.");
       onAuthed(pw);
     } catch (err) {
@@ -134,14 +171,14 @@ function Inquiries({ token, onLogout }) {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(null);
 
-  const headers = { "X-Admin-Token": token };
-
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API}/contact`, { headers });
+      const res = await axios.get(`${API}/contact`, {
+        headers: { "X-Admin-Token": token },
+      });
       setItems(res.data || []);
-      if (res.data?.[0] && !active) setActive(res.data[0]);
+      setActive((curr) => curr || res.data?.[0] || null);
     } catch (err) {
       if (err?.response?.status === 401) {
         toast.error("Session expired. Please sign in again.");
@@ -152,17 +189,18 @@ function Inquiries({ token, onLogout }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token, onLogout]);
 
   useEffect(() => {
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [load]);
 
   const remove = async (id) => {
     if (!window.confirm("Delete this inquiry permanently?")) return;
     try {
-      await axios.delete(`${API}/contact/${id}`, { headers });
+      await axios.delete(`${API}/contact/${id}`, {
+        headers: { "X-Admin-Token": token },
+      });
       toast.success("Inquiry deleted.");
       const next = items.filter((i) => i.id !== id);
       setItems(next);
@@ -358,38 +396,27 @@ function Inquiries({ token, onLogout }) {
 }
 
 export default function Admin() {
-  const [token, setToken] = useState(localStorage.getItem(TOKEN_KEY) || "");
+  const [token, setToken] = useState(() => tokenStore.get());
 
-  // Re-verify the cached token on mount; clear it if invalid
+  // Re-verify the stored token on mount; clear it if invalid
   useEffect(() => {
     if (!token) return;
     axios
       .post(`${API}/admin/verify`, {}, { headers: { "X-Admin-Token": token } })
       .catch(() => {
-        localStorage.removeItem(TOKEN_KEY);
+        tokenStore.clear();
         setToken("");
       });
   }, [token]);
 
-  const logout = () => {
-    localStorage.removeItem(TOKEN_KEY);
+  const logout = useCallback(() => {
+    tokenStore.clear();
     setToken("");
-  };
+  }, []);
 
   return (
     <>
-      <Toaster
-        position="top-right"
-        theme="dark"
-        toastOptions={{
-          style: {
-            background: "#121212",
-            border: "1px solid rgba(212,175,55,0.3)",
-            color: "#fff",
-            borderRadius: 0,
-          },
-        }}
-      />
+      <Toaster position="top-right" theme="dark" toastOptions={TOAST_OPTIONS} />
       {token ? (
         <Inquiries token={token} onLogout={logout} />
       ) : (

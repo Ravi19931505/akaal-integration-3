@@ -33,6 +33,15 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 /* ---------------- Animated Counter ---------------- */
+const TOAST_OPTIONS = {
+  style: {
+    background: "#121212",
+    border: "1px solid rgba(212,175,55,0.3)",
+    color: "#fff",
+    borderRadius: 0,
+  },
+};
+
 function Counter({ end, suffix = "", duration = 1800 }) {
   const ref = useRef(null);
   const [val, setVal] = useState(0);
@@ -303,14 +312,14 @@ function Hero() {
             style={{ transitionDelay: "260ms" }}
           >
             {[
-              { k: "20+", v: "Years of Mastery" },
-              { k: "300+", v: "Projects Delivered" },
-              { k: "24/7", v: "Service & Support" },
-              { k: "100%", v: "In-House Design" },
-            ].map((s, i) => (
-              <div key={i} data-testid={`hero-stat-${i}`}>
+              { id: "years", k: 20, s: "+", v: "Years of Mastery" },
+              { id: "projects", k: 300, s: "+", v: "Projects Delivered" },
+              { id: "support", k: 24, s: "/7", v: "Service & Support" },
+              { id: "design", k: 100, s: "%", v: "In-House Design" },
+            ].map((s) => (
+              <div key={s.id} data-testid={`hero-stat-${s.id}`}>
                 <div className="text-3xl sm:text-4xl text-white font-light tracking-tight">
-                  {s.k}
+                  <Counter end={s.k} suffix={s.s} />
                 </div>
                 <div className="mt-1 text-[0.7rem] tracking-[0.2em] uppercase text-zinc-500">
                   {s.v}
@@ -350,7 +359,7 @@ function TrustedStrip() {
       <div className="marquee-track">
         {[...items, ...items].map((t, i) => (
           <span
-            key={i}
+            key={`${t}-${i}`}
             className="brand-mark text-xs sm:text-sm text-zinc-500 whitespace-nowrap flex items-center gap-4"
           >
             <span className="w-1 h-1 bg-[#d4af37] rounded-full" />
@@ -794,9 +803,9 @@ function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {PROJECTS.map((p, i) => (
             <a
-              key={i}
+              key={p.title}
               href="#contact"
-              data-testid={`project-card-${i}`}
+              data-testid={`project-card-${p.title.replace(/\s+/g, "-").toLowerCase()}`}
               className="reveal group relative block overflow-hidden border border-white/5 hover:border-[#d4af37]/40 transition-colors"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
@@ -945,11 +954,11 @@ function About() {
                   t: "Lifelong Support",
                   d: "Up to 25-year warranty on certified runs, with continued service, audits and optimization.",
                 },
-              ].map((item, i) => (
+              ].map((item) => (
                 <div
-                  key={i}
+                  key={item.t}
                   className="bg-[#0a0a0a] p-8 sm:p-10"
-                  data-testid={`about-pillar-${i}`}
+                  data-testid={`about-pillar-${item.t.replace(/\s+/g, "-").toLowerCase()}`}
                 >
                   <h4 className="text-lg text-white font-medium tracking-tight mb-3">
                     {item.t}
@@ -1311,18 +1320,7 @@ function MarketingSite() {
 
   return (
     <div className="App">
-      <Toaster
-        position="top-right"
-        theme="dark"
-        toastOptions={{
-          style: {
-            background: "#121212",
-            border: "1px solid rgba(212,175,55,0.3)",
-            color: "#fff",
-            borderRadius: 0,
-          },
-        }}
-      />
+      <Toaster position="top-right" theme="dark" toastOptions={TOAST_OPTIONS} />
       <Navbar />
       <main>
         <Hero />
