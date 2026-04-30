@@ -861,7 +861,7 @@ function About() {
     >
       <div className="container-wide">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-          <div className="lg:col-span-5 reveal sticky top-28">
+          <div className="lg:col-span-5 reveal lg:sticky lg:top-28">
             <div className="kicker mb-6">05 / Who We Are</div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight font-light">
               <span className="akaal-gold-text italic">Akaal.</span>
