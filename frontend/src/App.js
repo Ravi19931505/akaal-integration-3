@@ -410,8 +410,8 @@ const SERVICES = [
     icon: BadgeCheck,
     title: "Cable Testing & Certification",
     blurb:
-      "Industry-standard testing and certification — every link documented, validated and warrantied.",
-    bullets: ["Fluke certification", "Pass / fail reports", "25-year warranty", "Compliance docs"],
+      "We certify every Cat6 and fiber optic run with industry-leading Fluke testers — and deliver the full pass/fail results as a branded PDF report.",
+    bullets: ["Fluke DSX / Versiv testers", "Cat6 / Cat6A certified", "Fiber OTDR certified", "PDF reports delivered"],
   },
   {
     id: "upgrade",
