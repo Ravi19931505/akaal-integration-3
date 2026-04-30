@@ -747,32 +747,39 @@ function Approach() {
 /* ---------------- Projects ---------------- */
 const PROJECTS = [
   {
-    title: "High-Rise Residential Tower",
-    cat: "Security · Access · CCTV",
-    location: "Mississauga, ON",
+    title: "Cat6 Patch Panel Termination",
+    cat: "Structured Cabling · Rack Build",
+    location: "Corporate HQ · Brampton, ON",
     image:
-      "https://images.pexels.com/photos/16239257/pexels-photo-16239257.jpeg",
+      "https://customer-assets.emergentagent.com/job_web-app-hub-22/artifacts/a95x9aqo_947c39d2-cadc-4934-82a8-202fa4b7f982.jpeg",
   },
   {
-    title: "Custom Smart Estate",
-    cat: "AV · Automation · Lighting",
-    location: "Brampton, ON",
+    title: "Overhead Cable Tray Install",
+    cat: "Structured Cabling · Pathway",
+    location: "Office Fit-Out · Mississauga, ON",
     image:
-      "https://images.pexels.com/photos/32334253/pexels-photo-32334253.jpeg",
+      "https://customer-assets.emergentagent.com/job_web-app-hub-22/artifacts/clzawqvv_7b8e5a38-a404-4452-a4d2-a7ce07219c6c.jpeg",
   },
   {
-    title: "Commercial Headquarters",
-    cat: "Structured Cabling · Fiber",
-    location: "Toronto, ON",
+    title: "EMT Conduit Pathway",
+    cat: "Conduit · Cable Pull",
+    location: "Commercial Build · Toronto, ON",
     image:
-      "https://images.pexels.com/photos/6466141/pexels-photo-6466141.jpeg",
+      "https://customer-assets.emergentagent.com/job_web-app-hub-22/artifacts/ujramdel_20d349dc-0cec-466a-a40a-6f7955dc428b.jpeg",
   },
   {
-    title: "Boutique Hospitality Suite",
-    cat: "Integrated Security & AV",
-    location: "Vaughan, ON",
+    title: "Perimeter CCTV Deployment",
+    cat: "Surveillance · Outdoor Install",
+    location: "Industrial Site · GTA",
     image:
-      "https://images.pexels.com/photos/10233086/pexels-photo-10233086.jpeg",
+      "https://customer-assets.emergentagent.com/job_web-app-hub-22/artifacts/2o1lveza_0f4dfb9f-2a12-4cdd-a2d4-541c4957812f.jpeg",
+  },
+  {
+    title: "Warehouse Network Rack",
+    cat: "Distribution Centre · Network Closet",
+    location: "Logistics Facility · GTA",
+    image:
+      "https://customer-assets.emergentagent.com/job_web-app-hub-22/artifacts/d55avx65_9dd8d15e-c994-49c0-baf3-575ec01d18e3.jpeg",
   },
 ];
 
@@ -786,17 +793,17 @@ function Projects() {
       <div className="container-wide">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div className="reveal max-w-2xl">
-            <div className="kicker mb-6">04 / Selected Work</div>
+            <div className="kicker mb-6">04 / Recent Projects</div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight font-light">
-              Quiet excellence,
+              The craft,
               <br />
-              <span className="akaal-gold-text italic">across the GTA.</span>
+              <span className="akaal-gold-text italic">on display.</span>
             </h2>
           </div>
           <p className="reveal text-zinc-400 max-w-md text-lg" style={{ transitionDelay: "120ms" }}>
-            A glimpse of recent integrations — from luxury residences to
-            full-stack commercial deployments. Detailed case studies available
-            upon request.
+            Real work from recent Akaal deployments — patch panels, cable
+            trays, conduit pathways, surveillance and warehouse network
+            closets. Built clean. Documented. Certified.
           </p>
         </div>
 
@@ -806,14 +813,18 @@ function Projects() {
               key={p.title}
               href="#contact"
               data-testid={`project-card-${p.title.replace(/\s+/g, "-").toLowerCase()}`}
-              className="reveal group relative block overflow-hidden border border-white/5 hover:border-[#d4af37]/40 transition-colors"
+              className={`reveal group relative block overflow-hidden border border-white/5 hover:border-[#d4af37]/40 transition-colors ${
+                i === PROJECTS.length - 1 && PROJECTS.length % 2 === 1 ? "md:col-span-2" : ""
+              }`}
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className={`${
+                i === PROJECTS.length - 1 && PROJECTS.length % 2 === 1 ? "aspect-[21/9]" : "aspect-[4/3]"
+              } overflow-hidden`}>
                 <img
                   src={p.image}
                   alt={p.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1200ms] ease-out"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1200ms] ease-out"
                   loading="lazy"
                 />
               </div>
