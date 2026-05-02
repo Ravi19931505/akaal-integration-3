@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "@/App.css";
 import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -1011,20 +1011,33 @@ const PROJECT_TYPES = [
   "Other",
 ];
 
-function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    project_type: "",
-    message: "",
-  });
+const EMPTY_CONTACT_FORM = {
+  name: "",
+  email: "",
+  phone: "",
+  project_type: "",
+  message: "",
+};
+
+function buildContactPayload(form) {
+  return {
+    ...form,
+    project_type: form.project_type || null,
+    phone: form.phone || null,
+  };
+}
+
+function useContactForm() {
+  const [form, setForm] = useState(EMPTY_CONTACT_FORM);
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+  const update = useCallback(
+    (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value })),
+    []
+  );
 
-  const submit = async (e) => {
+  const submit = useCallback(async (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
       toast.error("Please fill in name, email and a brief message.");
@@ -1032,15 +1045,12 @@ function Contact() {
     }
     setLoading(true);
     try {
-      await axios.post(`${API}/contact`, {
-        ...form,
-        project_type: form.project_type || null,
-        phone: form.phone || null,
-      });
+      await axios.post(`${API}/contact`, buildContactPayload(form));
       setSent(true);
       toast.success("Thank you — we'll be in touch within one business day.");
-      setForm({ name: "", email: "", phone: "", project_type: "", message: "" });
+      setForm(EMPTY_CONTACT_FORM);
     } catch (err) {
+      console.error("[contact] submission failed", err);
       const detail =
         err?.response?.data?.detail ||
         "Could not send your inquiry. Please call 416-918-3601.";
@@ -1048,7 +1058,13 @@ function Contact() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [form]);
+
+  return { form, update, submit, loading, sent };
+}
+
+function Contact() {
+  const { form, update, submit, loading, sent } = useContactForm();
 
   return (
     <section
