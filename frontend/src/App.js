@@ -32,6 +32,9 @@ import { Toaster, toast } from "sonner";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+const LOGO_URL =
+  "https://customer-assets.emergentagent.com/job_web-app-hub-22/artifacts/qpjuzseg_87b73ed4-9faa-495d-9ec0-9403e12e06f7.jpeg";
+
 /* ---------------- Animated Counter ---------------- */
 const TOAST_OPTIONS = {
   style: {
@@ -143,13 +146,13 @@ function Navbar() {
           data-testid="brand-home-btn"
           onClick={() => go("hero")}
           className="flex items-center gap-3 group"
+          aria-label="Akaal Integrated Solutions — Home"
         >
-          <span className="w-9 h-9 border border-[#d4af37] flex items-center justify-center text-[#d4af37] font-light text-lg glow-border">
-            A
-          </span>
-          <span className="brand-mark text-sm sm:text-base text-white">
-            Akaal<span className="text-[#d4af37]"> · </span>Integrated
-          </span>
+          <img
+            src={LOGO_URL}
+            alt="Akaal Integrated Solutions"
+            className="h-11 w-auto rounded-sm shadow-lg shadow-black/40"
+          />
         </button>
 
         <nav className="hidden lg:flex items-center gap-10">
@@ -1259,17 +1262,11 @@ function Footer() {
       <div className="container-wide py-16">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-10 h-10 border border-[#d4af37] flex items-center justify-center text-[#d4af37] text-xl font-light">
-                A
-              </span>
-              <div>
-                <div className="brand-mark text-white text-base">Akaal</div>
-                <div className="text-xs text-zinc-500 tracking-[0.2em] uppercase">
-                  Integrated Solutions
-                </div>
-              </div>
-            </div>
+            <img
+              src={LOGO_URL}
+              alt="Akaal Integrated Solutions"
+              className="h-16 w-auto rounded-sm shadow-lg shadow-black/40 mb-6"
+            />
             <p className="text-zinc-500 text-sm max-w-sm leading-relaxed">
               Top-tier network cabling, fiber, CCTV and audio-visual services
               for businesses across the Greater Toronto Area.
